@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Layout from "../components/Layout";
 import OrderCard from "../components/OrderCard";
 import ChatWindow from "../components/ChatWindow";
@@ -8,12 +8,12 @@ export default function CustomerDashboard({ user, onLogout }) {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     setLoading(true);
     const data = await getOrders(user.user_id);
     setOrders(data);
     setLoading(false);
-  };
+  }, [user.user_id]);
 
   const handleCancelOrder = async (orderId) => {
     const res = await cancelOrder(orderId);
@@ -27,7 +27,7 @@ export default function CustomerDashboard({ user, onLogout }) {
 
   useEffect(() => {
     fetchData();
-  }, [user.user_id]);
+  }, [fetchData]);
 
   return (
     <Layout user={user} onLogout={onLogout}>
