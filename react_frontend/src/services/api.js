@@ -1,7 +1,7 @@
-const API_BASE = "http://127.0.0.1:8002";
+const API_BASE = "https://jackshelby-chatbot.onrender.com";
 
 export async function login(username, password) {
-  const res = await fetch("https://jackshelby-chatbot.onrender.com/chat", {
+  const res = await fetch(`${API_BASE}/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -43,10 +43,15 @@ export async function getCustomers() {
 }
 
 export async function sendMessage(userId, message) {
-  const res = await fetch(
-    `http://127.0.0.1:8002/chat/${userId}?message=${encodeURIComponent(message)}`,
-    { method: "POST" }
-  );
+  const res = await fetch(`${API_BASE}/chat/${userId}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      message: message
+    })
+  });
 
   return await res.json();
 }
