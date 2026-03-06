@@ -1,7 +1,7 @@
 const API_BASE = "http://127.0.0.1:8002";
 
 export async function login(username, password) {
-  const res = await fetch("http://127.0.0.1:8002/login", {
+  const res = await fetch("https://jackshelby-chatbot.onrender.com/chat", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
