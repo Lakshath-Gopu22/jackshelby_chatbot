@@ -10,7 +10,15 @@ def jackshelby_ai(prompt):
             "prompt": prompt,
             "stream": False
         },
-        timeout=60
+        headers={
+            "ngrok-skip-browser-warning": "true",
+            "User-Agent": "JackShelbyBot/1.0",
+        },
+        timeout=120
     )
 
-    return response.json()["response"]
+    if response.status_code != 200:
+        print(f"Ollama Error: {response.status_code} - {response.text}")
+        return f"AI is temporarily unavailable (Error {response.status_code}). Please try again."
+
+    return response.json()["response"]
