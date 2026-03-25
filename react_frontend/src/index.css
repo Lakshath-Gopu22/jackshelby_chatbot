@@ -2,14 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
 @layer base {
   body {
     @apply bg-background text-white antialiased min-h-screen selection:bg-primary/30 selection:text-white;
     background-image: 
-      radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.15) 0px, transparent 50%),
-      radial-gradient(at 100% 0%, rgba(129, 140, 248, 0.15) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, rgba(52, 211, 153, 0.1) 0px, transparent 50%),
-      radial-gradient(at 0% 100%, rgba(251, 113, 133, 0.1) 0px, transparent 50%);
+      radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.12) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(129, 140, 248, 0.12) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(52, 211, 153, 0.08) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, rgba(251, 113, 133, 0.08) 0px, transparent 50%);
     background-attachment: fixed;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
@@ -27,7 +29,7 @@
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -41,4 +43,71 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.2);
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-content {
+  animation: scaleIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Timeline connector */
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(-50%);
+}
+
+/* Star rating */
+.star-btn {
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 1.5rem;
+}
+
+.star-btn:hover {
+  transform: scale(1.2);
+}
+
+/* Notification badge pulse */
+.notif-badge {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Voice recording pulse */
+.voice-pulse {
+  animation: voicePulse 1.5s ease-in-out infinite;
+}
+
+@keyframes voicePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(251, 113, 133, 0.5); }
+  50% { box-shadow: 0 0 0 12px rgba(251, 113, 133, 0); }
+}
+
+/* Recharts custom */
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: rgba(255, 255, 255, 0.05);
 }
